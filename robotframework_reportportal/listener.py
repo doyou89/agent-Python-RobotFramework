@@ -21,8 +21,21 @@ def start_launch(launch):
             launch_name=Variables.launch_name,
             attributes=gen_attributes(Variables.launch_attributes),
             description=launch.doc)
+        if Variables.re_run == "yes":
+            RobotService.start_launch(
+                launch_name=Variables.launch_name,
+                attributes=gen_attributes(Variables.launch_attributes),
+                description=launch.doc,
+                rerun=True)
     else:
         RobotService.rp.launch_id = Variables.launch_id
+        if Variables.re_run == "yes":
+            RobotService.start_launch(
+                launch_name=Variables.launch_name,
+                attributes=gen_attributes(Variables.launch_attributes),
+                description=launch.doc,
+                rerun=True,
+                rerunOf=Variables.launch_id)
 
 
 def start_suite(name, attributes):
@@ -50,6 +63,12 @@ def end_suite(_, attributes):
     suite = Suite(attributes=attributes)
     if suite.robot_id == "s1":
         logging.debug(msg="ReportPortal - End Launch: {0}".format(attributes))
+        if Variables.re_run != "no":
+            RobotService.start_launch(
+                launch_name=Variables.launch_name,
+                attributes=gen_attributes(Variables.launch_attributes),
+                description=suite.doc,
+                rerun=True)
         RobotService.finish_launch(launch=suite)
         RobotService.terminate_service()
     else:

@@ -70,13 +70,15 @@ class RobotService(object):
             RobotService.rp.terminate()
 
     @staticmethod
-    def start_launch(launch_name, attributes=None, description=None, mode=None):
+    def start_launch(launch_name, attributes=None, description=None, mode=None, rerun=False, rerunOf=None):
         """Call start_launch method of the common client.
 
         :param launch_name: Launch name
         :param attributes:  Launch attributes
         :param description: Launch description
         :param mode:        Launch mode
+        :param rerun:       set rerun
+        :param rerunOf:     launch UUID for rerun
         :return:            launch UUID
         """
         sl_pt = {
@@ -84,7 +86,9 @@ class RobotService(object):
             "name": launch_name,
             "start_time": timestamp(),
             "description": description,
-            "mode": mode
+            "mode": mode,
+            "rerun": rerun,
+            "rerunOf": rerunOf
         }
         logging.debug("ReportPortal - Start launch: "
                       "request_body={0}".format(sl_pt))

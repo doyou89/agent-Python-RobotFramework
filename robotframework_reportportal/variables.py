@@ -18,6 +18,7 @@ class Variables(object):
     launch_attributes = None
     launch_id = None
     test_attributes = None
+    re_run = None
 
     @staticmethod
     def check_variables():
@@ -46,3 +47,4 @@ class Variables(object):
         Variables.launch_doc = get_variable("RP_LAUNCH_DOC", default=None)
         Variables.log_batch_size = int(get_variable("RP_LOG_BATCH_SIZE", default="20"))
         Variables.test_attributes = get_variable("RP_TEST_ATTRIBUTES", default="").split()
+        Variables.re_run = get_variable("RP_RERUN", default="no")
