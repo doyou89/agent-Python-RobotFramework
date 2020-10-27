@@ -15,7 +15,7 @@ class Variables(object):
     project = None
     launch_doc = None
     log_batch_size = None
-    launch_attributes = None
+    launch_attributes = []
     launch_id = None
     test_attributes = None
     re_run = None

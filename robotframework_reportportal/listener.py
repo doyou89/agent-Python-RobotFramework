@@ -29,7 +29,6 @@ def start_launch(launch):
             launch_name=Variables.launch_name,
             attributes=gen_attributes(Variables.launch_attributes),
             description=launch.doc,
-            uuid=Variables.launch_id,
             rerun=True,
             rerunOf=Variables.launch_id)
 
@@ -64,7 +63,6 @@ def end_suite(_, attributes):
                 launch_name=Variables.launch_name,
                 attributes=gen_attributes(Variables.launch_attributes),
                 description=suite.doc,
-                uuid=Variables.launch_id,
                 rerun=True,
                 rerunOf=Variables.launch_id)
         RobotService.finish_launch(launch=suite)
